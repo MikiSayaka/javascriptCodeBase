@@ -1,3 +1,4 @@
+```javascript
 (function ($) {
   //  Put json data into a select tag for options.
   $.fn.genSelectFromJson = function (_value, _option, _objData) {
