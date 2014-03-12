@@ -1,4 +1,4 @@
 SayakaUtil
 ==========
 
-A jQuery tool that can help my job.
+A tool base that can help my job.
