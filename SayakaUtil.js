@@ -48,20 +48,33 @@
     return _rtnData;
   }
   
-  //  Fix the getValueFromForm, find the all input item(include input, select, textarea) and put into json.
-  //  FIXME not finished yet.
+  //  Get form value into json
   $.fn.getValueFromFormEx = function () {
     var _rtnObj = new Object();
     var _this = $(this);
     var _formItem = _this.find('input,select,textarea');
-    _formItem.each(function(i){
+    _formItem.each(function (i) {
       var _thisItem = $(this);
       if (/input/i.test(_thisItem[0].tagName) && _thisItem.attr('type') == 'checkbox') {
-        console.log(_thisItem);
-        //  TODO  here!!
+        var _thisName = _thisItem.attr('name');
+        if (_thisItem.attr('checked') == 'checked') {
+          if (_rtnObj[_thisName] !== undefined) {
+            _rtnObj[_thisName].push(_thisItem.val());
+          } else {
+            _rtnObj[_thisName] = new Array();
+            _rtnObj[_thisName].push(_thisItem.val());
+          }
+        }
       } else {
+        if (_thisItem.attr('type') == 'radio') {
+          if (_thisItem.attr('checked') == 'checked') {
+            _rtnObj[_thisItem.attr('name')] = _thisItem.val();
+          }
+        } else {
+          _rtnObj[_thisItem.attr('name')] = _thisItem.val();
+        }
       }
     });
-    return(_rtnObj);
+    return _rtnObj;
   }
 })(jQuery);
